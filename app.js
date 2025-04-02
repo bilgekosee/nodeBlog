@@ -1,31 +1,21 @@
 const express = require("express");
+const mongoose = require("mongoose");
 const { engine } = require("express-handlebars");
 const app = express();
 const path = require("path");
+
+mongoose
+  .connect("mongodb://127.0.0.1:27017/nodeblog_db")
+  .then(() => console.log("Connected!"));
 
 app.use(express.static("public"));
 
 app.engine("handlebars", engine());
 app.set("view engine", "handlebars");
 
-app.get("/", (req, res) => {
-  res.render("site/index");
-});
-app.get("/about", (req, res) => {
-  res.render("site/about");
-});
-app.get("/blog", (req, res) => {
-  res.render("site/blog");
-});
-app.get("/contact", (req, res) => {
-  res.render("site/contact");
-});
-app.get("/login", (req, res) => {
-  res.render("site/login");
-});
-app.get("/register", (req, res) => {
-  res.render("site/register");
-});
+const main = require("./routes/main");
+app.use("/", main);
+
 const port = 3000;
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
