@@ -1,8 +1,9 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-const { engine } = require("express-handlebars");
+const exphbs = require("express-handlebars");
 const fileUpload = require("express-fileupload");
+const moment = require("moment");
 const app = express();
 
 mongoose
@@ -12,7 +13,15 @@ mongoose
 app.use(fileUpload());
 app.use(express.static("public"));
 
-app.engine("handlebars", engine());
+const hbs = exphbs.create({
+  helpers: {
+    generateDate: (date, format) => {
+      return moment(date).format(format);
+    },
+  },
+});
+
+app.engine("handlebars", hbs.engine);
 app.set("view engine", "handlebars");
 
 // parse application/x-www-form-urlencoded
