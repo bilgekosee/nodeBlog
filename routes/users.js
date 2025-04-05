@@ -9,7 +9,11 @@ router.get("/register", (req, res) => {
 router.post("/register", async (req, res) => {
   try {
     await User.create(req.body);
-    res.redirect("/");
+    req.session.sessionFlash = {
+      type: "alert alert-success",
+      message: "Kullanıcı başarılı bir şekilde oluşturuldu",
+    };
+    res.redirect("/users/login");
   } catch (error) {
     console.error(error);
   }
