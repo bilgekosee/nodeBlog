@@ -26,7 +26,7 @@ router.post("/login", async (req, res) => {
 
     if (user) {
       if (user.password === password) {
-        //user session
+        req.session.userId = user._id;
         res.redirect("/");
       } else {
         res.redirect("/users/login");

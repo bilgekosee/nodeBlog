@@ -4,7 +4,10 @@ const Post = require("../models/Post");
 const path = require("path");
 
 router.get("/new", (req, res) => {
-  res.render("site/addpost");
+  if (req.session.userId) {
+    return res.render("site/addpost");
+  }
+  res.redirect("/users/login");
 });
 router.get("/:id", (req, res) => {
   Post.findById(req.params.id)
