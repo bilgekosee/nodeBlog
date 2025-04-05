@@ -42,6 +42,21 @@ app.use(bodyParser.urlencoded());
 // parse application/json
 app.use(bodyParser.json());
 
+//display link
+app.use((req, res, next) => {
+  const { userId } = req.session;
+  if (userId) {
+    res.locals = {
+      displayLink: true,
+    };
+  } else {
+    res.locals = {
+      displayLink: false,
+    };
+  }
+  next();
+});
+
 const main = require("./routes/main");
 const posts = require("./routes/posts");
 const users = require("./routes/users");

@@ -27,18 +27,27 @@
         <li class="nav-item">
           <a class="nav-link" href="/blog">Blog</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/posts/new">Add Post</a>
-        </li>
+        {{#if displayLink}}
+          <li class="nav-item">
+            <a class="nav-link" href="/posts/new">Add Post</a>
+          </li>
+        {{/if}}
         <li class="nav-item">
           <a class="nav-link" href="contact">Contact</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/users/login">Login</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/users/register">Register</a>
-        </li>
+        {{#unless displayLink}}
+          <li class="nav-item">
+            <a class="nav-link" href="/users/login">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/users/register">Register</a>
+          </li>
+        {{/unless}}
+        {{#if displayLink}}
+          <li class="nav-item">
+            <a class="nav-link" href="/users/logout">Logout</a>
+          </li>
+        {{/if}}
       </ul>
     </div>
   </div>
