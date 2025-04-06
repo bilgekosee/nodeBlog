@@ -6,9 +6,9 @@ router.get("/", (req, res) => {
   console.log(req.session);
   res.render("site/index");
 });
-router.get("/admin", (req, res) => {
+/* router.get("/admin", (req, res) => {
   res.render("admin/index");
-});
+}); */
 router.get("/blog", (req, res) => {
   Post.find({})
     .lean()
