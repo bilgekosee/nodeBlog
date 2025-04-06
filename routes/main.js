@@ -11,6 +11,7 @@ router.get("/", (req, res) => {
 }); */
 router.get("/blog", (req, res) => {
   Post.find({})
+    .sort({ $natural: -1 })
     .lean()
     .then((posts) => {
       res.render("site/blog", { posts: posts });
