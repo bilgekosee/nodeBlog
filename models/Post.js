@@ -8,6 +8,7 @@ const PostSchema = new mongoose.Schema({
   date: { type: Date, default: Date.now },
   post_image: { type: String, required: true },
   category: { type: Schema.Types.ObjectId, ref: "categories" },
+  author: { type: Schema.Types.ObjectId, ref: "users" },
 });
 
 module.exports = mongoose.model("Post", PostSchema);
